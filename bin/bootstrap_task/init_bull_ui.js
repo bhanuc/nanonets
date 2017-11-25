@@ -5,7 +5,7 @@ const express = require('express');
 const router = express.Router();
 
 const app = express();
-
+const appRoot = require('app-root-path');
 const config = require(`${appRoot}/config`);
 
 const queues = [{

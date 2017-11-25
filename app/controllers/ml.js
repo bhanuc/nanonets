@@ -2,9 +2,7 @@
 
 const Router = require('koa-router');
 const appRoot = require('app-root-path');
-const {
-  validator,
-} = require('koa-joi-router-2');
+// const {validator} = require('koa-joi-router-2');
 
 const model = require(`${appRoot}/app/models/model.js`);
 const path = require('path');
