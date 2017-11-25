@@ -1,5 +1,5 @@
 {
-  "name": "API server nanonets",
+  "name": "nanonets",
   "description": "API server nanonets",
   "version": "0.0.1",
   "homepage": "https://github.com/bhanuc/nanonets",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:bhanuc/nanonets.git"
+    "url": "https://github.com/bhanuc/nanonets"
   },
   "bugs": {
     "url": "https://github.com/bhanuc/nanonets/issues"
