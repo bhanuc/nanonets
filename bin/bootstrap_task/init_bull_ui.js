@@ -6,9 +6,11 @@ const router = express.Router();
 
 const app = express();
 
+const config = require(`${appRoot}/config`);
+
 const queues = [{
   name: 'Image-Training',
-  port: 32773,
+  port: config.redis_port,
   host: '127.0.0.1',
   hostId: 'AWS',
 }];

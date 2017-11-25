@@ -12,7 +12,7 @@ const request = {
 const meta = {
   swagger: {
     summary: 'Test a model',
-    description: 'Get a model object, by uploading an image',
+    description: 'Get a model object, by uploading an image, you need send an image with any key names via multipart',
     tags: ['Model'],
   },
 };

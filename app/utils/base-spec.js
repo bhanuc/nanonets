@@ -2,16 +2,16 @@
 
 module.exports = {
   info: {
-    title: 'Queue-Server API',
-    description: 'This is the API Doc for the Queue-Server API.',
+    title: 'ML API',
+    description: 'This is the API Doc for the ML API.',
     version: '1.1',
     'x-logo': {
-      url: 'https://tarantool.org/en/_static/images/tarantool.png',
+      url: 'https://d2aezjsmcp2rsz.cloudfront.net/companylogos/blob_VefbfFa',
     },
   },
   basePath: '/',
   tags: [{
     name: 'Common',
-    description: 'The common API Endpoints of the Queue-Server API.',
+    description: 'The common API Endpoints of the ML API.',
   }],
 };

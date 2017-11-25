@@ -19,7 +19,7 @@ const test = async (filepath, i, j, k) => new Promise((resolve, reject) => {
   });
 });
 
-const experiments_variables = [
+const experimentsVariables = [
   [0.001, 1, 1000],
   [0.001, 1, 2000],
   [0.001, 1, 4000],
@@ -50,6 +50,6 @@ const experiments_variables = [
 ];
 module.exports = {
   train,
-  experiments_variables,
+  experimentsVariables,
   test,
 };

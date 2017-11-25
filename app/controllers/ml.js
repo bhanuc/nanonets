@@ -7,13 +7,11 @@ const {
 } = require('koa-joi-router-2');
 
 const model = require(`${appRoot}/app/models/model.js`);
-const form = require(`${appRoot}/app/middlewares/form.js`);
 const path = require('path');
 
 const schemasBasePath = path.join(appRoot.path, 'app/schemas');
-const joiValidator = validator(schemasBasePath);
+// const joiValidator = validator(schemasBasePath);
 const multer = require('koa-multer');
-const crypto = require('crypto');
 const mime = require('mime');
 const mkdirp = require('mkdirp');
 const worker = require('../workers/train');
@@ -23,7 +21,7 @@ const storageTraining = multer.diskStorage({
     const id = req.url.split('models/')[1];
     mkdirp(`uploads/${id}/training`, (err) => {
       if (err) {
-        console.error(err);
+        cb(err);
       } else {
         cb(null, `uploads/${id}/training`);
       }
@@ -39,7 +37,7 @@ const storageTesting = multer.diskStorage({
     const id = req.url.split('models/')[1];
     mkdirp(`uploads/${id}/testing`, (err) => {
       if (err) {
-        console.error(err);
+        cb(err);
       } else {
         cb(null, `uploads/${id}/testing`);
       }

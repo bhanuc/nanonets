@@ -21,14 +21,7 @@ const getModelById = async (conn, id) => {
   }
   throw new Error('Model Not found');
 };
-const trainModel = async (conn, id) => {
-  const object = await r.table('models').get(id).run(conn);
-  if (object) {
-    // const files = _.flatten(object.files)
-    return object;
-  }
-  throw new Error('Model Not found');
-};
+
 const ModelexistsById = async (ctx, next) => {
   const { id } = ctx.params;
   const object = await r.table('models').get(id).run(ctx.db);

@@ -7,16 +7,17 @@ const DB = require(`${appRoot}/lib/rethinkdb`);
 const bb = require('bluebird');
 const r = bb.promisifyAll(require('rethinkdb'));
 
+const config = require(`${appRoot}/config`);
 const pythonTrainer = require(`${appRoot}/app/python/util`);
 
-const imageQueue = new Queue('Image-Training', 'redis://127.0.0.1:32773');
+const imageQueue = new Queue('Image-Training', 'redis://127.0.0.1:'+ config.redis_port);
 let conn;
 
 (async () => {
   conn = await DB.init();
 })();
 
-const exp_variables = pythonTrainer.experiments_variables;
+const expVariables = pythonTrainer.experimentsVariables;
 
 imageQueue.process(async (job, done) => {
   const { id } = job.data;
@@ -30,13 +31,13 @@ imageQueue.process(async (job, done) => {
       let best = {
         i: '0.001', k: '1000', j: '1', image: '', accuracy: 0.14223534095829604,
       };
-      const results = await Promise.all(exp_variables.map(async (variables) => {
+      const results = await Promise.all(expVariables.map(async (variables) => {
         const result = await pythonTrainer.train(folderPath, ...variables);
-        const parsed_result = JSON.parse(result.replace(/'/g, '"'));
-        if (parsed_result.accuracy > best.accuracy) best = parsed_result;
+        const parsedResult = JSON.parse(result.replace(/'/g, '"'));
+        if (parsedResult.accuracy > best.accuracy) best = parsedResult;
         return result;
       }));
-      const updateResults = await r.table('models').get(id).update({
+      await r.table('models').get(id).update({
         results, best,
       }).run(conn);
       done(null, results);
