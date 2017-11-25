@@ -24,7 +24,7 @@ imageQueue.process(async (job, done) => {
   if (!id) {
     done(new Error('No Model ID'));
   }
-  const object = await r.table('models').get(id).run(conn);
+  const object = await r.table('nanomodels').get(id).run(conn);
   if (object) {
     const folderPath = `${appRoot}/uploads/${id}/testing`;
     try {
@@ -37,7 +37,7 @@ imageQueue.process(async (job, done) => {
         if (parsedResult.accuracy > best.accuracy) best = parsedResult;
         return result;
       }));
-      await r.table('models').get(id).update({
+      await r.table('nanomodels').get(id).update({
         results, best,
       }).run(conn);
       done(null, results);
