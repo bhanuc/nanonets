@@ -10,11 +10,11 @@ const r = bb.promisifyAll(require('rethinkdb'));
 const config = require(`${appRoot}/config`);
 const pythonTrainer = require(`${appRoot}/app/python/util`);
 
-const imageQueue = new Queue('Image-Training', 'redis://127.0.0.1:'+ config.redis_port);
+const imageQueue = new Queue('Image-Training', `redis://127.0.0.1:${config.redis_port}`);
 let conn;
 
 (async () => {
-  conn = await DB.init();
+  conn = await DB.connect();
 })();
 
 const expVariables = pythonTrainer.experimentsVariables;
