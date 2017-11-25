@@ -1,0 +1,64 @@
+{
+  "name": "API server nanonets",
+  "description": "API server nanonets",
+  "version": "0.0.1",
+  "homepage": "https://github.com/bhanuc/nanonets",
+  "author": {
+    "name": "Bhanu Pratap Chaudhary",
+    "email": "bhanu423@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:bhanuc/nanonets.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bhanuc/nanonets/issues"
+  },
+  "main": "bin/server.js",
+  "engines": {
+    "node": ">= 8.3.0"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "coverage": "jest --coverage",
+    "test": "npm run lint && npm run coverage && jest",
+    "jest": "jest",
+    "precommit": "npm run lint",
+    "prepush": "npm test",
+    "start": "node bin/server.js"
+  },
+  "dependencies": {
+    "app-root-path": "^2.0.1",
+    "async-busboy": "^0.6.2",
+    "bluebird": "^3.5.1",
+    "bull": "^3.3.6",
+    "bull-arena": "^2.2.1",
+    "compile-run": "^1.2.2",
+    "express": "^4.16.2",
+    "joi": "^13.0.1",
+    "joi-to-swagger": "^1.1.0",
+    "koa": "^2.3.0",
+    "koa-better-body": "^3.0.4",
+    "koa-bodyparser": "^4.2.0",
+    "koa-joi-router-2": "0.0.4",
+    "koa-multer": "^1.0.2",
+    "koa-router": "^7.2.1",
+    "lodash": "^4.17.4",
+    "mime": "^1.6.0",
+    "rethinkdb": "^2.3.3",
+    "tarantool-driver": "^2.0.5"
+  },
+  "devDependencies": {
+    "@koa/cors": "^2.2.1",
+    "eslint": "^4.10.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-react": "^7.5.1",
+    "husky": "^0.14.0",
+    "jest": "^21.2.1",
+    "jest-cli": "^21.2.1",
+    "supertest": "^3.0.0"
+  },
+  "license": "UNLICENSED"
+}
