@@ -8,12 +8,12 @@ const pythonTrainer = require(`${appRoot}/app/python/util`);
 
 
 const createModel = async (name) => {
-  const object = await r.table('models').insert({ name }).run();
+  const object = await r.table('nanomodels').insert({ name }).run();
   return object;
 };
 
 const getModelById = async (id) => {
-  const object = await r.table('models').get(id).run();
+  const object = await r.table('nanomodels').get(id).run();
   if (object) {
     object.files = _.flatten(object.files);
     return object;
@@ -23,7 +23,7 @@ const getModelById = async (id) => {
 
 const ModelexistsById = async (ctx, next) => {
   const { id } = ctx.params;
-  const object = await r.table('models').get(id).run();
+  const object = await r.table('nanomodels').get(id).run();
   if (object) {
     await next();
   } else {
@@ -32,14 +32,14 @@ const ModelexistsById = async (ctx, next) => {
 };
 const uploadImage = async (id, files) => {
   const filesMatch = _.map(files, file => file.path);
-  const update = await r.table('models').get(id).update({
+  const update = await r.table('nanomodels').get(id).update({
     files: r.row('files').append(filesMatch).default([]),
   }).run();
   return { filesMatch, update };
 };
 
 const testImage = async (id, files) => {
-  const object = await r.table('models').get(id).run();
+  const object = await r.table('nanomodels').get(id).run();
   const bestVariables = object.best;
   const folderPath = `${appRoot}/uploads/${id}/testing/${JSON.stringify(files[0].path)}`;
   const result = await pythonTrainer.test(folderPath, bestVariables.i, bestVariables.j, bestVariables.k);
