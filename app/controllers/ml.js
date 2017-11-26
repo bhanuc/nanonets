@@ -55,11 +55,11 @@ const uploadTest = multer({
 const Models = {
   putModel: async (ctx) => {
     const { name } = ctx.request.body;
-    ctx.body = await model.createModel(ctx.db, name);
+    ctx.body = await model.createModel(name);
   },
   getModel: async (ctx) => {
     const { id } = ctx.params;
-    ctx.body = await model.getModelById(ctx.db, id);
+    ctx.body = await model.getModelById(id);
   },
   trainModel: async (ctx) => {
     const { id } = ctx.params;
@@ -69,13 +69,13 @@ const Models = {
   uploadImage: async (ctx) => {
     const { id } = ctx.params;
     const { files } = ctx.req;
-    const resp = await model.uploadImage(ctx.db, id, files);
+    const resp = await model.uploadImage(id, files);
     ctx.body = resp;
   },
   testImage: async (ctx) => {
     const { id } = ctx.params;
     const { files } = ctx.req;
-    const resp = await model.testImage(ctx.db, id, files);
+    const resp = await model.testImage(id, files);
     ctx.body = resp;
   },
   getRouter: () => {

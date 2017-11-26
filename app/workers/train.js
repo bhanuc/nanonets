@@ -4,18 +4,13 @@ const Queue = require('bull');
 const appRoot = require('app-root-path');
 
 const DB = require(`${appRoot}/lib/rethinkdb`);
-const bb = require('bluebird');
-const r = bb.promisifyAll(require('rethinkdb'));
+const r = require('rethinkdbdash')();
 
 const config = require(`${appRoot}/config`);
 const pythonTrainer = require(`${appRoot}/app/python/util`);
 
 const imageQueue = new Queue('Image-Training', `redis://127.0.0.1:${config.redis_port}`);
-let conn;
 
-(async () => {
-  conn = await DB.connect();
-})();
 
 const expVariables = pythonTrainer.experimentsVariables;
 
@@ -24,7 +19,7 @@ imageQueue.process(async (job, done) => {
   if (!id) {
     done(new Error('No Model ID'));
   }
-  const object = await r.table('nanomodels').get(id).run(conn);
+  const object = await r.table('nanomodels').get(id).run();
   if (object) {
     const folderPath = `${appRoot}/uploads/${id}/testing`;
     try {
@@ -39,7 +34,7 @@ imageQueue.process(async (job, done) => {
       }));
       await r.table('nanomodels').get(id).update({
         results, best,
-      }).run(conn);
+      }).run();
       done(null, results);
     } catch (error) {
       throw new Error(error);

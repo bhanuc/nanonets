@@ -28,8 +28,6 @@ class App {
 
   async init() {
     const app = new Koa();
-    const db = await DB.init();
-    app.context.db = db;
     if (DEV) {
       const transformed_controllers = _.map(controllers, controller => controller.getRouter());
       const cors = require('@koa/cors');
